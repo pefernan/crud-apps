@@ -15,40 +15,40 @@ import org.jboss.errai.demo.client.shared.DepartmentEvent;
 public class DepartmentEndpointImpl implements DepartmentEndpoint {
 
   @Inject
-  private Event<DepartmentEvent> DepartmentEvent;
+  private Event<DepartmentEvent> departmentEvent;
 
   @Inject
-  private DepartmentService DepartmentService;
+  private DepartmentService departmentService;
 
   @Override
   public Department get(Long id) {
-    return DepartmentService.getById(id);
+    return departmentService.getById(id);
   }
 
   @Override
   public List<Department> listAll() {
-    return DepartmentService.listAll();
+    return departmentService.listAll();
   }
   
   @Override
   public Response create(Department entity) {
-    DepartmentService.create(entity);
-    DepartmentEvent.fire(new DepartmentEvent());
+    departmentService.create( entity );
+    departmentEvent.fire( new DepartmentEvent() );
     return Response.created(
             UriBuilder.fromResource(DepartmentEndpoint.class).path(String.valueOf(entity.getId())).build()).build();
   }
 
   @Override
   public Response update(Long id, Department entity) {
-    DepartmentService.update(id, entity);
-    DepartmentEvent.fire(new DepartmentEvent());
+    departmentService.update( id, entity );
+    departmentEvent.fire( new DepartmentEvent() );
     return Response.ok().build();
   }
 
   @Override
   public Response delete(Long id) {
-    DepartmentService.delete(id);
-    DepartmentEvent.fire(new DepartmentEvent());
+    departmentService.delete( id );
+    departmentEvent.fire( new DepartmentEvent() );
     return Response.noContent().build();
   }
 }

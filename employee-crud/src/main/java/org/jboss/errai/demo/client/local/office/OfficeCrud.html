@@ -1,7 +1,7 @@
-<div class="row">
+<div>
   <div class="row inputs">
   	<div class="span8 cols offset2">
-  		<button class="btn btn-large btn-primary" id="create">Create Employee</button>
+  		<button class="btn btn-large btn-primary" id="create">Create Office</button>
   	</div>
   </div>
   <div class="row inputs">
@@ -10,19 +10,15 @@
         <thead>
           <tr>
             <th>Id</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email Address</th>
-            <th>Hire Date</th>
+            <th>Office Name</th>
+            <th>Address</th>
           </tr>
         </thead>
-        <tbody id="employees">
-          <tr id="employee" valign="top" class="item">
+        <tbody id="offices">
+          <tr id="office" valign="top" class="item">
             <td data-field="id" width="5%">#1</td>
-            <td data-field="firstName" width="20%">Christian</td>
-            <td data-field="lastName" width="20%">Sadilek</td>
-            <td data-field="email">csadilek@redhat.com</td>
-            <td data-field="hireDate">04/04/2011</td>
+            <td data-field="name" width="20%">Barcelona</td>
+            <td data-field="address">Passeig de gracia 120, Barcelona</td>
             <td width="1px"><button class="btn btn-primary" id="edit">Edit</button></td>
             <td width="1px"><button class="btn btn-primary" id="delete">Delete</button></td>
           </tr>

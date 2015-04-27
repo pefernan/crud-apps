@@ -39,7 +39,12 @@ public class EditEmployeeForm extends FormView<EditEmployeeFormModel> {
   @Bound(property = "employee.department")
   @DataField
   private TextBox employee_department;
-  
+
+  @Inject
+  @Bound(property = "employee.office")
+  @DataField
+  private TextBox employee_office;
+
   @Inject
   @Bound(property = "employee.hireDate")
   @DataField
@@ -54,6 +59,7 @@ public class EditEmployeeForm extends FormView<EditEmployeeFormModel> {
     inputNames.add( "employee_lastName" );
     inputNames.add( "employee_email" );
     inputNames.add( "employee_department" );
+    inputNames.add( "employee_office" );
     inputNames.add( "employee_hireDate" );
   }
 

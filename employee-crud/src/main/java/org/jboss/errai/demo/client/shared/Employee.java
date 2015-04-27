@@ -32,7 +32,11 @@ public class Employee {
   
   private String email;
 
+  @NotEmpty
   private String department;
+
+  @NotEmpty
+  private String office;
   
   private Date hireDate;
 
@@ -85,6 +89,14 @@ public class Employee {
 
   public void setDepartment( String department ) {
     this.department = department;
+  }
+
+  public String getOffice() {
+    return office;
+  }
+
+  public void setOffice( String office ) {
+    this.office = office;
   }
 
   public String getPicture() {

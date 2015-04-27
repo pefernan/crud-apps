@@ -41,6 +41,11 @@ public class CreateEmployeeForm extends FormView<CreateEmployeeFormModel> {
   private TextBox employee_department;
 
   @Inject
+  @Bound(property = "employee.office")
+  @DataField
+  private TextBox employee_office;
+
+  @Inject
   @Bound(property = "employee.hireDate")
   @DataField
   private DatePicker employee_hireDate;
@@ -53,6 +58,7 @@ public class CreateEmployeeForm extends FormView<CreateEmployeeFormModel> {
     inputNames.add( "employee_lastName" );
     inputNames.add( "employee_email" );
     inputNames.add( "employee_department" );
+    inputNames.add( "employee_office" );
     inputNames.add( "employee_hireDate" );
   }
 
