@@ -38,7 +38,7 @@ public class CreateDepartmentModalForm extends Composite {
   @PostConstruct
 
   public void init() {
-    m.setSize( ModalSize.LARGE );
+    m.setSize( ModalSize.MEDIUM );
     m.setHideOtherModals( true );
     m.setClosable( true );
     
