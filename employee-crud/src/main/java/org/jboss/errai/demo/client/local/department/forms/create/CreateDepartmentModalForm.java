@@ -1,41 +1,37 @@
-package org.jboss.errai.demo.client.local.form.create;
+package org.jboss.errai.demo.client.local.department.forms.create;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.http.client.Response;
-import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import org.gwtbootstrap3.client.ui.Modal;
 import org.gwtbootstrap3.client.ui.ModalBody;
-import org.gwtbootstrap3.client.ui.ModalFooter;
 import org.gwtbootstrap3.client.ui.ModalSize;
 import org.gwtbootstrap3.client.ui.constants.ModalBackdrop;
 import org.jboss.errai.common.client.api.Caller;
-import org.jboss.errai.demo.client.local.form.FormView;
-import org.jboss.errai.demo.client.shared.EmployeeEndpoint;
-import org.jboss.errai.demo.client.shared.form.CreateEmployeeFormModel;
+import org.jboss.errai.demo.client.shared.DepartmentEndpoint;
 import org.jboss.errai.enterprise.client.jaxrs.api.ResponseCallback;
 import org.jboss.errai.ui.shared.api.annotations.DataField;
 import org.jboss.errai.ui.shared.api.annotations.EventHandler;
 import org.jboss.errai.ui.shared.api.annotations.Templated;
 
 @Templated
-public class CreateEmployeeModalForm extends Composite {
+public class CreateDepartmentModalForm extends Composite {
 
   @Inject
   @DataField
-  private CreateEmployeeForm createEmployeeForm;
+  private CreateDepartmentForm createDepartmentForm;
 
   @Inject
   @DataField
   private Button save;
 
   @Inject
-  private Caller<EmployeeEndpoint> endpoint;
+  private Caller<DepartmentEndpoint> endpoint;
 
   private Modal m = new Modal();
 
@@ -49,7 +45,7 @@ public class CreateEmployeeModalForm extends Composite {
     ModalBody b = new ModalBody();
     b.add( this );
     
-    m.setTitle( "Create new Employee" );
+    m.setTitle( "Create new Department" );
     m.add( b );
     
     m.setFade( true );
@@ -58,7 +54,7 @@ public class CreateEmployeeModalForm extends Composite {
 
   @EventHandler("save")
   private void onSave(ClickEvent e) {
-    if (createEmployeeForm.validate())
+    if ( createDepartmentForm.validate())
       endpoint.call(new ResponseCallback() {
         @Override
         public void callback(Response response) {
@@ -67,11 +63,11 @@ public class CreateEmployeeModalForm extends Composite {
           }
           hide();
         }
-      }).create(createEmployeeForm.getModel().getEmployee());
+      }).create( createDepartmentForm.getModel().getDepartment());
   }
 
   public void show() {
-    createEmployeeForm.setModel( new CreateEmployeeFormModel() );
+    createDepartmentForm.setModel( new CreateDepartmentFormModel() );
     m.show();
   }
   

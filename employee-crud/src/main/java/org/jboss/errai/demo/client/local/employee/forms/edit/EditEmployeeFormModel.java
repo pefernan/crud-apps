@@ -1,20 +1,24 @@
-package org.jboss.errai.demo.client.shared.form;
+package org.jboss.errai.demo.client.local.employee.forms.edit;
 
 import javax.validation.Valid;
 
+import org.jboss.errai.common.client.api.annotations.MapsTo;
 import org.jboss.errai.common.client.api.annotations.Portable;
 import org.jboss.errai.databinding.client.api.Bindable;
 import org.jboss.errai.demo.client.shared.Employee;
 
 @Bindable
 @Portable
-public class CreateEmployeeFormModel {
+public class EditEmployeeFormModel {
 
     @Valid
     Employee employee;
 
-    public CreateEmployeeFormModel() {
-        employee = new Employee();
+    public EditEmployeeFormModel() {
+    }
+
+    public EditEmployeeFormModel( @MapsTo("employee") Employee employee ) {
+        this.employee = employee;
     }
 
     public Employee getEmployee() {

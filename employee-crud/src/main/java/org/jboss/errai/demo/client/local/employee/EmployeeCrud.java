@@ -1,32 +1,27 @@
-package org.jboss.errai.demo.client.local;
+package org.jboss.errai.demo.client.local.employee;
 
 import java.util.List;
-
 import javax.annotation.PostConstruct;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.Composite;
 import org.jboss.errai.common.client.api.Caller;
 import org.jboss.errai.common.client.api.RemoteCallback;
-import org.jboss.errai.demo.client.local.form.create.CreateEmployeeModalForm;
+import org.jboss.errai.demo.client.local.employee.forms.create.CreateEmployeeModalForm;
 import org.jboss.errai.demo.client.shared.Employee;
 import org.jboss.errai.demo.client.shared.EmployeeEndpoint;
 import org.jboss.errai.demo.client.shared.EmployeeEvent;
 import org.jboss.errai.ui.client.widget.ListWidget;
 import org.jboss.errai.ui.client.widget.Table;
-import org.jboss.errai.ui.nav.client.local.DefaultPage;
-import org.jboss.errai.ui.nav.client.local.Page;
 import org.jboss.errai.ui.shared.api.annotations.DataField;
 import org.jboss.errai.ui.shared.api.annotations.EventHandler;
 import org.jboss.errai.ui.shared.api.annotations.Templated;
 
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.Composite;
-
-@Page(role = DefaultPage.class)
 @Templated
-public class CrudApp extends Composite {
+public class EmployeeCrud extends Composite {
 
   @Inject
   private CreateEmployeeModalForm createModal;

@@ -1,4 +1,4 @@
-package org.jboss.errai.demo.client.local.form.edit;
+package org.jboss.errai.demo.client.local.department.forms.edit;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -13,28 +13,26 @@ import org.gwtbootstrap3.client.ui.ModalBody;
 import org.gwtbootstrap3.client.ui.ModalSize;
 import org.gwtbootstrap3.client.ui.constants.ModalBackdrop;
 import org.jboss.errai.common.client.api.Caller;
-import org.jboss.errai.demo.client.shared.Employee;
-import org.jboss.errai.demo.client.shared.EmployeeEndpoint;
-import org.jboss.errai.demo.client.shared.form.CreateEmployeeFormModel;
-import org.jboss.errai.demo.client.shared.form.EditEmployeeFormModel;
+import org.jboss.errai.demo.client.shared.Department;
+import org.jboss.errai.demo.client.shared.DepartmentEndpoint;
 import org.jboss.errai.enterprise.client.jaxrs.api.ResponseCallback;
 import org.jboss.errai.ui.shared.api.annotations.DataField;
 import org.jboss.errai.ui.shared.api.annotations.EventHandler;
 import org.jboss.errai.ui.shared.api.annotations.Templated;
 
 @Templated
-public class EditEmployeeModalForm extends Composite {
+public class EditDepartmentModalForm extends Composite {
 
   @Inject
   @DataField
-  private EditEmployeeForm editEmployeeForm;
+  private EditDepartmentForm editDepartmentForm;
 
   @Inject
   @DataField
   private Button save;
 
   @Inject
-  private Caller<EmployeeEndpoint> endpoint;
+  private Caller<DepartmentEndpoint> endpoint;
 
   private Modal m = new Modal();
 
@@ -48,7 +46,7 @@ public class EditEmployeeModalForm extends Composite {
     ModalBody b = new ModalBody();
     b.add( this );
     
-    m.setTitle( "Create new Employee" );
+    m.setTitle( "Edit Department" );
     m.add( b );
     
     m.setFade( true );
@@ -57,7 +55,7 @@ public class EditEmployeeModalForm extends Composite {
 
   @EventHandler("save")
   private void onSave(ClickEvent e) {
-    if ( editEmployeeForm.validate())
+    if ( editDepartmentForm.validate())
       endpoint.call(new ResponseCallback() {
         @Override
         public void callback(Response response) {
@@ -66,11 +64,11 @@ public class EditEmployeeModalForm extends Composite {
           }
           hide();
         }
-      }).update( editEmployeeForm.getModel().getEmployee().getId(), editEmployeeForm.getModel().getEmployee());
+      }).update( editDepartmentForm.getModel().getDepartment().getId(), editDepartmentForm.getModel().getDepartment());
   }
 
-  public void startEdit(Employee employee) {
-    editEmployeeForm.setModel( new EditEmployeeFormModel( employee ) );
+  public void startEdit(Department department) {
+    editDepartmentForm.setModel( new EditDepartmentFormModel( department ) );
     m.show();
   }
   

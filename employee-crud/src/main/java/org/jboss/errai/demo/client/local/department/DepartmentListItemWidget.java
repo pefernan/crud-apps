@@ -1,19 +1,6 @@
-package org.jboss.errai.demo.client.local;
+package org.jboss.errai.demo.client.local.department;
 
 import javax.inject.Inject;
-
-import org.jboss.errai.common.client.api.Caller;
-import org.jboss.errai.databinding.client.api.DataBinder;
-import org.jboss.errai.demo.client.local.form.edit.EditEmployeeModalForm;
-import org.jboss.errai.demo.client.shared.Employee;
-import org.jboss.errai.demo.client.shared.EmployeeEndpoint;
-import org.jboss.errai.enterprise.client.jaxrs.api.ResponseCallback;
-import org.jboss.errai.ui.client.widget.HasModel;
-import org.jboss.errai.ui.shared.api.annotations.AutoBound;
-import org.jboss.errai.ui.shared.api.annotations.Bound;
-import org.jboss.errai.ui.shared.api.annotations.DataField;
-import org.jboss.errai.ui.shared.api.annotations.EventHandler;
-import org.jboss.errai.ui.shared.api.annotations.Templated;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.http.client.Response;
@@ -22,13 +9,25 @@ import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import org.jboss.errai.common.client.api.Caller;
+import org.jboss.errai.databinding.client.api.DataBinder;
+import org.jboss.errai.demo.client.local.department.forms.edit.EditDepartmentModalForm;
+import org.jboss.errai.demo.client.shared.Department;
+import org.jboss.errai.demo.client.shared.DepartmentEndpoint;
+import org.jboss.errai.enterprise.client.jaxrs.api.ResponseCallback;
+import org.jboss.errai.ui.client.widget.HasModel;
+import org.jboss.errai.ui.shared.api.annotations.AutoBound;
+import org.jboss.errai.ui.shared.api.annotations.Bound;
+import org.jboss.errai.ui.shared.api.annotations.DataField;
+import org.jboss.errai.ui.shared.api.annotations.EventHandler;
+import org.jboss.errai.ui.shared.api.annotations.Templated;
 
-@Templated("CrudApp.html#employee")
-public class EmployeeListItemWidget extends Composite implements HasModel<Employee> {
+@Templated("DepartmentCrud.html#department")
+public class DepartmentListItemWidget extends Composite implements HasModel<Department> {
 
   @Inject
   @AutoBound
-  private DataBinder<Employee> binder;
+  private DataBinder<Department> binder;
 
   @Bound
   @DataField
@@ -36,19 +35,11 @@ public class EmployeeListItemWidget extends Composite implements HasModel<Employ
 
   @Bound
   @DataField
-  private final Element firstName = DOM.createTD();
+  private final Element name = DOM.createTD();
   
   @Bound
   @DataField
-  private final Element lastName = DOM.createTD();
-
-  @Bound
-  @DataField
-  private final Element email = DOM.createTD();
-
-  @Bound
-  @DataField
-  private final Element hireDate = DOM.createTD();
+  private final Element description = DOM.createTD();
 
   @Inject
   @DataField
@@ -59,14 +50,14 @@ public class EmployeeListItemWidget extends Composite implements HasModel<Employ
   private Button delete;
   
   @Inject
-  private EditEmployeeModalForm form;
+  private EditDepartmentModalForm form;
   
   @Inject
-  private Caller<EmployeeEndpoint> endpoint;
+  private Caller<DepartmentEndpoint> endpoint;
   
   @EventHandler("edit")
   private void onEdit(ClickEvent e) {
-    form.startEdit(binder.getModel());
+    form.startEdit( binder.getModel() );
   }
   
   @EventHandler("delete")
@@ -82,12 +73,12 @@ public class EmployeeListItemWidget extends Composite implements HasModel<Employ
   }
   
   @Override
-  public Employee getModel() {
+  public Department getModel() {
     return binder.getModel();
   }
 
   @Override
-  public void setModel(Employee model) {
+  public void setModel(Department model) {
     binder.setModel(model);
   }
 

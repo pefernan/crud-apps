@@ -1,4 +1,4 @@
-package org.jboss.errai.demo.client.local.form.edit;
+package org.jboss.errai.demo.client.local.employee.forms.edit;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,10 +7,7 @@ import javax.inject.Inject;
 
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.datepicker.client.DatePicker;
-import org.jboss.errai.common.client.api.Caller;
-import org.jboss.errai.demo.client.local.form.FormView;
-import org.jboss.errai.demo.client.shared.EmployeeEndpoint;
-import org.jboss.errai.demo.client.shared.form.EditEmployeeFormModel;
+import org.jboss.errai.demo.client.local.FormView;
 import org.jboss.errai.ui.shared.api.annotations.Bound;
 import org.jboss.errai.ui.shared.api.annotations.DataField;
 import org.jboss.errai.ui.shared.api.annotations.Templated;
@@ -37,6 +34,11 @@ public class EditEmployeeForm extends FormView<EditEmployeeFormModel> {
   @Bound(property = "employee.email")
   @DataField
   private TextBox employee_email;
+
+  @Inject
+  @Bound(property = "employee.department")
+  @DataField
+  private TextBox employee_department;
   
   @Inject
   @Bound(property = "employee.hireDate")
@@ -46,15 +48,12 @@ public class EditEmployeeForm extends FormView<EditEmployeeFormModel> {
 
   private List inputNames = new ArrayList(  );
 
-
-  @Inject
-  private Caller<EmployeeEndpoint> endpoint;
-
   @PostConstruct
   protected void init() {
     inputNames.add( "employee_firstName" );
     inputNames.add( "employee_lastName" );
     inputNames.add( "employee_email" );
+    inputNames.add( "employee_department" );
     inputNames.add( "employee_hireDate" );
   }
 
@@ -62,6 +61,4 @@ public class EditEmployeeForm extends FormView<EditEmployeeFormModel> {
   public List<String> getInputNames() {
     return inputNames;
   }
-
-  
 }

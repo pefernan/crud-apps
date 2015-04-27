@@ -1,7 +1,6 @@
 package org.jboss.errai.demo.client.shared;
 
 import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -32,6 +31,8 @@ public class Employee {
   private String lastName;
   
   private String email;
+
+  private String department;
   
   private Date hireDate;
 
@@ -76,6 +77,14 @@ public class Employee {
 
   public void setHireDate(Date hireDate) {
     this.hireDate = hireDate;
+  }
+
+  public String getDepartment() {
+    return department;
+  }
+
+  public void setDepartment( String department ) {
+    this.department = department;
   }
 
   public String getPicture() {

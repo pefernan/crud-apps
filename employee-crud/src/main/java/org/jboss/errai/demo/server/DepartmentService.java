@@ -7,35 +7,35 @@ import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import org.jboss.errai.demo.client.shared.Employee;
+import org.jboss.errai.demo.client.shared.Department;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-public class EmployeeService {
+public class DepartmentService {
 
   @PersistenceContext(unitName = "forge-default")
   private EntityManager em;
 
-  public Employee getById(Long id) {
-    return em.find(Employee.class, id);
+  public Department getById(Long id) {
+    return em.find(Department.class, id);
   }
 
   @SuppressWarnings("unchecked")
-  public List<Employee> listAll() {
-    return em.createNamedQuery("allEmployees").getResultList();
+  public List<Department> listAll() {
+    return em.createNamedQuery("allDepartments").getResultList();
   }
   
-  public void create(Employee entity) {
+  public void create(Department entity) {
     em.persist(entity);
   }
 
-  public void update(Long id, Employee entity) {
+  public void update(Long id, Department entity) {
     entity.setId(id);
     entity = em.merge(entity);
   }
 
   public void delete(Long id) {
-    Employee uc = em.find(Employee.class, id);
+    Department uc = em.find(Department.class, id);
     em.remove(uc);
   }
   

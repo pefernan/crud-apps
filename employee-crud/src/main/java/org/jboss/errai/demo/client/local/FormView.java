@@ -1,4 +1,4 @@
-package org.jboss.errai.demo.client.local.form;
+package org.jboss.errai.demo.client.local;
 
 import java.util.List;
 import java.util.Set;

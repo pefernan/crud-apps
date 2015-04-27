@@ -1,7 +1,6 @@
 package org.jboss.errai.demo.server;
 
 import java.util.List;
-
 import javax.ejb.Stateless;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
