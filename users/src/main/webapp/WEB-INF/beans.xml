@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://xmlns.jcp.org/xml/ns/javaee">
+
+  <scan>
+    <!-- These exclusions were added by Errai to avoid deploying client-side classes to the server -->
+    <exclude name = "demo.client.local.EmployeeListItemView" />
+    <exclude name = "demo.client.local.EmployeeListView" />
+    <exclude name = "demo.client.local.AddressListView" />
+    <exclude name = "demo.client.local.AddressListItemView" />
+    <exclude name = "demo.client.local.AddressFormView" />
+    <exclude name = "demo.client.local.SubForm" />
+    <exclude name = "demo.client.local.SubForm$FormModelProvider" />
+    <exclude name = "demo.client.local.EmployeeFormView" />
+    <exclude name = "demo.client.local.EmployeeFormView$1" />
+    <exclude name = "demo.client.local.EmployeeFormView$1$1" />
+    <exclude name = "demo.client.local.builtin.MainPage" />
+    <exclude name = "demo.client.local.builtin.FormViewManager" />
+    <!-- End of Errai exclusions -->
+  </scan>
+</beans>

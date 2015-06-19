@@ -1,0 +1,47 @@
+package demo.client.local;
+
+import org.livespark.formmodeler.rendering.client.view.ListView;
+import org.jboss.errai.ui.shared.api.annotations.Templated;
+import demo.client.shared.AddressFormModel;
+import demo.client.local.AddressFormView;
+import demo.client.local.AddressListItemView;
+import demo.client.shared.AddressRestService;
+import org.jboss.errai.common.client.api.RemoteCallback;
+import java.lang.Override;
+
+@Templated
+public class AddressListView extends ListView<AddressFormModel, AddressListItemView>
+{
+
+   @Override
+   protected void loadData(RemoteCallback callback)
+   {
+      org.jboss.errai.enterprise.client.jaxrs.api.RestClient.create(
+            AddressRestService.class, callback).load();
+   }
+
+   @Override
+   protected void remoteDelete(AddressFormModel model, RemoteCallback callback)
+   {
+      org.jboss.errai.enterprise.client.jaxrs.api.RestClient.create(
+            AddressRestService.class, callback).delete(model);
+   }
+
+   @Override
+   protected Class<AddressFormView> getFormType()
+   {
+      return AddressFormView.class;
+   }
+
+   @Override
+   protected String getFormTitle()
+   {
+      return "AddressForm";
+   }
+
+   @Override
+   protected String getFormId()
+   {
+      return "Address Form";
+   }
+}
