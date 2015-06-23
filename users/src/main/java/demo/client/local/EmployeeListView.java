@@ -44,4 +44,9 @@ public class EmployeeListView extends ListView<EmployeeFormModel, EmployeeListIt
    {
       return "Employee Form";
    }
+
+   @Override
+   public EmployeeFormModel getCreationFormModel() {
+      return new EmployeeFormModel(  );
+   }
 }

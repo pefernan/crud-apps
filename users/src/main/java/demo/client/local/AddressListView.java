@@ -44,4 +44,9 @@ public class AddressListView extends ListView<AddressFormModel, AddressListItemV
    {
       return "Address Form";
    }
+
+   @Override
+   public AddressFormModel getCreationFormModel() {
+      return new AddressFormModel(  );
+   }
 }

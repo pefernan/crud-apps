@@ -1,10 +1,8 @@
 package demo.client.local;
 
-import com.google.gwt.user.client.Window;
 import demo.client.shared.Address;
 import demo.client.shared.AddressFormModel;
-import org.jboss.errai.databinding.client.api.PropertyChangeEvent;
-import org.jboss.errai.databinding.client.api.PropertyChangeHandler;
+import org.livespark.formmodeler.rendering.client.shared.components.EmbeddedForm;
 import org.livespark.formmodeler.rendering.client.view.FormView;
 import demo.client.shared.EmployeeFormModel;
 import demo.client.shared.EmployeeRestService;
@@ -40,20 +38,14 @@ public class EmployeeFormView extends FormView<EmployeeFormModel>
    @Bound(property = "employee.married")
    @DataField
    private CheckBox employee_married;
+   @Inject
+   @Bound(property = "employee.address.street")
+   @DataField
+   private TextBox employee_address_street;
 
    @DataField
    @Bound(property = "employee.address")
-   private SubForm<Address, AddressFormModel> employee_address = new SubForm<Address, AddressFormModel>("employee.address", new SubForm.FormModelProvider<Address, AddressFormModel>() {
-      public AddressFormModel getFormModelForModel( Address model ) {
-         binder.addPropertyChangeHandler( "employee.address", new PropertyChangeHandler<Address>() {
-            public void onPropertyChange( PropertyChangeEvent<Address> propertyChangeEvent ) {
-               Window.alert("change!");
-            }
-         } );
-         if (model == null) return new AddressFormModel(  );
-         return new AddressFormModel( model );
-      }
-   } );
+   private EmbeddedForm<Address, AddressFormModel> employee_address = new EmbeddedForm<Address, AddressFormModel>( new AddressEmbeddedFormAdapter() );
 
    @Inject
    private AddressFormView employee_address_formView;
@@ -70,6 +62,7 @@ public class EmployeeFormView extends FormView<EmployeeFormModel>
       inputNames.add("employee_lastName");
       inputNames.add("employee_birthday");
       inputNames.add("employee_married");
+      inputNames.add("employee_address_street");
       inputNames.add("employee_address");
    }
 
@@ -88,5 +81,12 @@ public class EmployeeFormView extends FormView<EmployeeFormModel>
    {
       org.jboss.errai.enterprise.client.jaxrs.api.RestClient.create(
             EmployeeRestService.class, callback).update(model);
+   }
+
+   public class AddressEmbeddedFormAdapter implements EmbeddedForm.EmbeddedFormModelAdapter<Address, AddressFormModel> {
+      public AddressFormModel getFormModelForModel( Address model ) {
+         if (model == null) return new AddressFormModel(  );
+         return new AddressFormModel( model );
+      }
    }
 }

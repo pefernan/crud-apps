@@ -11,7 +11,7 @@
                 <div class="controls">
                     <input class="form-control" id="employee_name" type="text"
                         size="15" maxlength="100"
-                        placeholder="Name" tabindex="1" style="min-height:30px"/>
+                        placeholder="Name" style="min-height:30px"/>
                     <p id="employee_name_help_block" class="help-block"></p>
                 </div>
             </div>
@@ -24,7 +24,7 @@
                 <div class="controls">
                     <input class="form-control" id="employee_lastName" type="text"
                         size="15" maxlength="100"
-                        placeholder="Last Name" tabindex="2" style="min-height:30px"/>
+                        placeholder="Last Name" style="min-height:30px"/>
                     <p id="employee_lastName_help_block" class="help-block"></p>
                 </div>
             </div>
@@ -37,7 +37,7 @@
                 <div class="controls">
                     <input class="form-control" id="employee_birthday" type="text"
                         size="15" maxlength="100"
-                        placeholder="Birthday" tabindex="3" style="min-height:30px"/>
+                        placeholder="Birthday" style="min-height:30px"/>
                     <p id="employee_birthday_help_block" class="help-block"></p>
                 </div>
             </div>
@@ -48,11 +48,21 @@
 			                <div id="employee_married_form_group" class="control-group">
                 <div class="controls">
                     <label class="checkbox">
-                      <input type="checkbox" id="employee_married" tabindex="4">
+                      <input type="checkbox" id="employee_married" >
                       Married
                     </label>
                     <p id="employee_married_help_block" class="help-block"></p>
                  </div>
+            </div>
+
+            <div id="employee_address_street_form_group" class="control-group">
+                <label class="control-label" class="control-label" for="employee_address_street">Street Name (root)</label>
+                <div class="controls">
+                    <input class="form-control" id="employee_address_street" type="text"
+                           size="15" maxlength="100"
+                           placeholder="Address street" style="min-height:30px"/>
+                    <p id="employee_address_street_help_block" class="help-block"></p>
+                </div>
             </div>
 
             <div id="employee_address" data-field="employee_address"></div>
