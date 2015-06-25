@@ -1,13 +1,10 @@
 package demo.client.local;
 
-import org.livespark.formmodeler.rendering.client.view.ListView;
-import org.jboss.errai.ui.shared.api.annotations.Templated;
 import demo.client.shared.EmployeeFormModel;
-import demo.client.local.EmployeeFormView;
-import demo.client.local.EmployeeListItemView;
 import demo.client.shared.EmployeeRestService;
 import org.jboss.errai.common.client.api.RemoteCallback;
-import java.lang.Override;
+import org.jboss.errai.ui.shared.api.annotations.Templated;
+import org.livespark.formmodeler.rendering.client.view.ListView;
 
 @Templated
 public class EmployeeListView extends ListView<EmployeeFormModel, EmployeeListItemView>
@@ -48,5 +45,10 @@ public class EmployeeListView extends ListView<EmployeeFormModel, EmployeeListIt
    @Override
    public EmployeeFormModel getCreationFormModel() {
       return new EmployeeFormModel(  );
+   }
+
+   @Override
+   public Class<EmployeeRestService> getRemoteServiceClass() {
+      return EmployeeRestService.class;
    }
 }

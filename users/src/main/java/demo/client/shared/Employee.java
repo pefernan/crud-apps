@@ -1,5 +1,8 @@
 package demo.client.shared;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.OneToOne;
 
 /**
@@ -33,9 +36,14 @@ public class Employee implements java.io.Serializable
    @OneToOne(fetch = javax.persistence.FetchType.EAGER, cascade = javax.persistence.CascadeType.ALL, orphanRemoval = true, optional = true)
    private Address address;
 
+   @org.kie.api.definition.type.Label("Childs")
+   @javax.persistence.OneToMany(cascade = CascadeType.ALL, mappedBy = "", orphanRemoval = false, fetch = javax.persistence.FetchType.EAGER)
+   private java.util.List<demo.client.shared.Children> children;
 
    public Employee()
    {
+      address = new Address(  );
+      children = new ArrayList<Children>(  );
    }
 
    public java.lang.Long getId()
@@ -98,9 +106,18 @@ public class Employee implements java.io.Serializable
       this.address = address;
    }
 
+   public List<Children> getChildren() {
+      return children;
+   }
+
+   public void setChildren( List<Children> children ) {
+      this.children = children;
+   }
+
    public Employee(java.lang.Long id, java.lang.String name,
          java.lang.String lastName, java.util.Date birthday,
-         java.lang.Boolean married, demo.client.shared.Address address)
+         java.lang.Boolean married, demo.client.shared.Address address,
+           List<Children> children)
    {
       this.id = id;
       this.name = name;
@@ -108,6 +125,7 @@ public class Employee implements java.io.Serializable
       this.birthday = birthday;
       this.married = married;
       this.address = address;
+      this.children = children;
    }
 
 }

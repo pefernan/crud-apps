@@ -1,22 +1,25 @@
 package demo.client.local;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.PostConstruct;
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import com.github.gwtbootstrap.client.ui.CheckBox;
+import com.github.gwtbootstrap.client.ui.TextBox;
+import com.google.gwt.user.datepicker.client.DatePicker;
 import demo.client.shared.Address;
 import demo.client.shared.AddressFormModel;
-import org.livespark.formmodeler.rendering.client.shared.components.EmbeddedForm;
-import org.livespark.formmodeler.rendering.client.view.FormView;
+import demo.client.shared.Children;
+import demo.client.shared.ChildrenFormModel;
 import demo.client.shared.EmployeeFormModel;
-import demo.client.shared.EmployeeRestService;
-import org.jboss.errai.ui.shared.api.annotations.Templated;
-
-import javax.annotation.PostConstruct;
-import javax.inject.Named;
-import com.github.gwtbootstrap.client.ui.TextBox;
-import javax.inject.Inject;
 import org.jboss.errai.ui.shared.api.annotations.Bound;
 import org.jboss.errai.ui.shared.api.annotations.DataField;
-import com.google.gwt.user.datepicker.client.DatePicker;
-import com.github.gwtbootstrap.client.ui.CheckBox;
-import org.jboss.errai.common.client.api.RemoteCallback;
+import org.jboss.errai.ui.shared.api.annotations.Templated;
+import org.livespark.formmodeler.rendering.client.shared.components.EmbeddedForm;
+import org.livespark.formmodeler.rendering.client.shared.components.MultipleEmbeddedForm;
+import org.livespark.formmodeler.rendering.client.view.FormView;
 
 @Templated
 @Named("EmployeeFormView")
@@ -38,14 +41,40 @@ public class EmployeeFormView extends FormView<EmployeeFormModel>
    @Bound(property = "employee.married")
    @DataField
    private CheckBox employee_married;
-   @Inject
-   @Bound(property = "employee.address.street")
-   @DataField
-   private TextBox employee_address_street;
 
    @DataField
    @Bound(property = "employee.address")
    private EmbeddedForm<Address, AddressFormModel> employee_address = new EmbeddedForm<Address, AddressFormModel>( new AddressEmbeddedFormAdapter() );
+
+   @DataField
+   @Bound(property = "employee.children")
+   private MultipleEmbeddedForm<List<Children>, Children, ChildrenFormModel> employee_children = new MultipleEmbeddedForm<List<Children>, Children, ChildrenFormModel>(
+           new MultipleEmbeddedForm.MultipleEmbeddedFormModelAdapter<List<Children>, Children, ChildrenFormModel>() {
+              public List<ChildrenFormModel> getListModelsForModel( List<Children> model ) {
+                 List <ChildrenFormModel> result = new ArrayList<ChildrenFormModel>(  );
+
+                 if (model != null) {
+                    for ( Children children : model ) {
+                       result.add( new ChildrenFormModel( children ) );
+                    }
+                 }
+
+                 return result;
+              }
+
+              public ChildrenFormModel getFormModelForModel( Children model ) {
+                 if (model == null) return  new ChildrenFormModel(  );
+                 return new ChildrenFormModel( model );
+              }
+           }
+   );
+
+   @Inject
+   private ChildrenListView employee_children_listView;
+
+   @Inject
+   private ChildrenFormView employee_children_formView;
+
 
    @Inject
    private AddressFormView employee_address_formView;
@@ -53,6 +82,8 @@ public class EmployeeFormView extends FormView<EmployeeFormModel>
    @PostConstruct
    public void init() {
       employee_address.setFormView( employee_address_formView );
+      employee_children.setFormView( employee_children_formView );
+      employee_children.setListView( employee_children_listView );
    }
 
    @Override
@@ -64,23 +95,12 @@ public class EmployeeFormView extends FormView<EmployeeFormModel>
       inputNames.add("employee_married");
       inputNames.add("employee_address_street");
       inputNames.add("employee_address");
+      inputNames.add( "employee_children" );
    }
 
    @Override
    public void setReadOnly(boolean readOnly)
    {
-   }
-
-   protected void createModel(EmployeeFormModel model, RemoteCallback callback)
-   {
-      org.jboss.errai.enterprise.client.jaxrs.api.RestClient.create(
-            EmployeeRestService.class, callback).create(model);
-   }
-
-   protected void updateModel(EmployeeFormModel model, RemoteCallback callback)
-   {
-      org.jboss.errai.enterprise.client.jaxrs.api.RestClient.create(
-            EmployeeRestService.class, callback).update(model);
    }
 
    public class AddressEmbeddedFormAdapter implements EmbeddedForm.EmbeddedFormModelAdapter<Address, AddressFormModel> {

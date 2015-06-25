@@ -1,17 +1,15 @@
 package demo.client.local;
 
-import org.jboss.errai.databinding.client.api.DataBinder;
-import org.livespark.formmodeler.rendering.client.view.FormView;
-import demo.client.shared.AddressFormModel;
-import demo.client.shared.AddressRestService;
-import org.jboss.errai.ui.shared.api.annotations.Templated;
-import javax.inject.Named;
-import com.github.gwtbootstrap.client.ui.TextBox;
 import javax.inject.Inject;
+import javax.inject.Named;
+
+import com.github.gwtbootstrap.client.ui.IntegerBox;
+import com.github.gwtbootstrap.client.ui.TextBox;
+import demo.client.shared.AddressFormModel;
 import org.jboss.errai.ui.shared.api.annotations.Bound;
 import org.jboss.errai.ui.shared.api.annotations.DataField;
-import com.github.gwtbootstrap.client.ui.IntegerBox;
-import org.jboss.errai.common.client.api.RemoteCallback;
+import org.jboss.errai.ui.shared.api.annotations.Templated;
+import org.livespark.formmodeler.rendering.client.view.FormView;
 
 @Templated
 @Named("AddressFormView")
@@ -52,17 +50,5 @@ public class AddressFormView extends FormView<AddressFormModel>
    @Override
    public void setReadOnly(boolean readOnly)
    {
-   }
-
-   protected void createModel(AddressFormModel model, RemoteCallback callback)
-   {
-      org.jboss.errai.enterprise.client.jaxrs.api.RestClient.create(
-            AddressRestService.class, callback).create(model);
-   }
-
-   protected void updateModel(AddressFormModel model, RemoteCallback callback)
-   {
-      org.jboss.errai.enterprise.client.jaxrs.api.RestClient.create(
-            AddressRestService.class, callback).update(model);
    }
 }

@@ -1,11 +1,11 @@
 package demo.client.local;
 
-import org.livespark.formmodeler.rendering.client.view.ListItemView;
-import demo.client.shared.EmployeeFormModel;
-import org.jboss.errai.ui.shared.api.annotations.Templated;
 import com.google.gwt.user.client.Element;
+import demo.client.shared.EmployeeFormModel;
 import org.jboss.errai.ui.shared.api.annotations.Bound;
 import org.jboss.errai.ui.shared.api.annotations.DataField;
+import org.jboss.errai.ui.shared.api.annotations.Templated;
+import org.livespark.formmodeler.rendering.client.view.ListItemView;
 
 @Templated("EmployeeListView.html#Employee-row")
 public class EmployeeListItemView extends ListItemView<EmployeeFormModel>

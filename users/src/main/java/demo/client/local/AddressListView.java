@@ -1,13 +1,10 @@
 package demo.client.local;
 
-import org.livespark.formmodeler.rendering.client.view.ListView;
-import org.jboss.errai.ui.shared.api.annotations.Templated;
 import demo.client.shared.AddressFormModel;
-import demo.client.local.AddressFormView;
-import demo.client.local.AddressListItemView;
 import demo.client.shared.AddressRestService;
 import org.jboss.errai.common.client.api.RemoteCallback;
-import java.lang.Override;
+import org.jboss.errai.ui.shared.api.annotations.Templated;
+import org.livespark.formmodeler.rendering.client.view.ListView;
 
 @Templated
 public class AddressListView extends ListView<AddressFormModel, AddressListItemView>
@@ -48,5 +45,10 @@ public class AddressListView extends ListView<AddressFormModel, AddressListItemV
    @Override
    public AddressFormModel getCreationFormModel() {
       return new AddressFormModel(  );
+   }
+
+   @Override
+   public Class<AddressRestService> getRemoteServiceClass() {
+      return AddressRestService.class;
    }
 }

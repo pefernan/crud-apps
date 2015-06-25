@@ -17,7 +17,7 @@
     </facet>
     <facet type="gwt" name="GWT">
       <configuration>
-        <setting name="additionalCompilerParameters" value="-XX:CompileThreshold=7000 -XX:MaxPermSize=256M -Derrai.jboss.javaopts=-XX:MaxPermSize=256m -Derrai.jboss.home=/tmp/niogit/ls-playground/users/target/wildfly-8.1.0.Final -Derrai.dev.context=demo" />
+        <setting name="additionalCompilerParameters" value="-XX:CompileThreshold=7000 -XX:MaxPermSize=256M -Derrai.jboss.javaopts=-XX:MaxPermSize=256m -Derrai.jboss.home=/home/pefernan/development/git/pefernan/crud-apps/users/target/wildfly-8.1.0.Final -Derrai.dev.context=demo" />
         <setting name="compilerParameters" value="-XdisableCastChecking -draftCompile" />
         <setting name="compilerMaxHeapSize" value="2048" />
         <setting name="gwtSdkUrl" value="file://$MAVEN_REPOSITORY$/com/google/gwt/gwt-dev/2.7.0/" />
