@@ -20,6 +20,8 @@ import org.jboss.errai.ui.shared.api.annotations.Templated;
 import org.livespark.formmodeler.rendering.client.shared.components.EmbeddedForm;
 import org.livespark.formmodeler.rendering.client.shared.components.MultipleEmbeddedForm;
 import org.livespark.formmodeler.rendering.client.view.FormView;
+import org.livespark.formmodeler.rendering.client.view.ListItemView;
+import org.livespark.formmodeler.rendering.client.view.ListView;
 
 @Templated
 @Named("EmployeeFormView")
@@ -48,42 +50,16 @@ public class EmployeeFormView extends FormView<EmployeeFormModel>
 
    @DataField
    @Bound(property = "employee.children")
-   private MultipleEmbeddedForm<List<Children>, Children, ChildrenFormModel> employee_children = new MultipleEmbeddedForm<List<Children>, Children, ChildrenFormModel>(
-           new MultipleEmbeddedForm.MultipleEmbeddedFormModelAdapter<List<Children>, Children, ChildrenFormModel>() {
-              public List<ChildrenFormModel> getListModelsForModel( List<Children> model ) {
-                 List <ChildrenFormModel> result = new ArrayList<ChildrenFormModel>(  );
-
-                 if (model != null) {
-                    for ( Children children : model ) {
-                       result.add( new ChildrenFormModel( children ) );
-                    }
-                 }
-
-                 return result;
-              }
-
-              public ChildrenFormModel getFormModelForModel( Children model ) {
-                 if (model == null) return  new ChildrenFormModel(  );
-                 return new ChildrenFormModel( model );
-              }
-           }
-   );
+   private MultipleEmbeddedForm<List<Children>, Children, ChildrenFormModel> employee_children = new MultipleEmbeddedForm<List<Children>, Children, ChildrenFormModel>(new EmployeeChildrenMultipleEmbeddedFormModelAdapter());
 
    @Inject
    private ChildrenListView employee_children_listView;
-
-   @Inject
-   private ChildrenFormView employee_children_formView;
-
 
    @Inject
    private AddressFormView employee_address_formView;
 
    @PostConstruct
    public void init() {
-      employee_address.setFormView( employee_address_formView );
-      employee_children.setFormView( employee_children_formView );
-      employee_children.setListView( employee_children_listView );
    }
 
    @Override
@@ -107,6 +83,28 @@ public class EmployeeFormView extends FormView<EmployeeFormModel>
       public AddressFormModel getFormModelForModel( Address model ) {
          if (model == null) return new AddressFormModel(  );
          return new AddressFormModel( model );
+      }
+
+      public FormView<AddressFormModel> getFormView() {
+         return employee_address_formView;
+      }
+   }
+
+   public class EmployeeChildrenMultipleEmbeddedFormModelAdapter implements MultipleEmbeddedForm.MultipleEmbeddedFormModelAdapter<List<Children>, Children, ChildrenFormModel> {
+      public List<ChildrenFormModel> getListModelsForModel( List<Children> model ) {
+         List <ChildrenFormModel> result = new ArrayList<ChildrenFormModel>(  );
+
+         if (model != null) {
+            for ( Children children : model ) {
+               result.add( new ChildrenFormModel( children ) );
+            }
+         }
+
+         return result;
+      }
+
+      public ListView<ChildrenFormModel, ? extends ListItemView<ChildrenFormModel>> getParentView() {
+         return employee_children_listView;
       }
    }
 }
